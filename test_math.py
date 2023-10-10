@@ -13,3 +13,6 @@ def test_simple_math ():
     
     def test_simple_math ():
     assert 1000 + 1000 != 0
+
+ def test_simple_math ():
+    assert 1000 + 1000 != 0
