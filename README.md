@@ -15,6 +15,6 @@ examples of usages
 etc
 How to:
 add application under test
-1. create a folder inside tests/github/bla
+1. create a folder inside tests/github/
 2. create a folder in application module
 3. Use the same coding standards to create a code
