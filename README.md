@@ -1,5 +1,5 @@
 # aqa.2023.mr
-This  framework is desgned in otder to perform tests for gihub using UI and API approaches.
+This  framework is desgned in order to perform tests for github using UI and API approaches.
 
 
 ## Framework structure
