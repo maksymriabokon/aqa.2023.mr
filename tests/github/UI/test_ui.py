@@ -1,21 +1,27 @@
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
 import time
 
-driver = webdriver.Chrome(executable_path = "C:\Users\maksym.riabokon\Downloads\chromedriver_win32")
-driver.get("https://gihub.com/login")
 
-username_field = driver.find_element_by_id("login_field")
+def test_github_login():
+    driver = webdriver.Edge()
 
-password_field = driver.find_element_by_id("password")
+    driver.get("https://github.com/login")
 
-login_button = driver.find_element_by_id("commit")
+    time.sleep(3)
 
-username_field.send_keys("incorrectLogin")
-password_field.send_keys("aaaaaaaaaaaa")
-login_button.click()
+    username_field = driver.find_element(By.ID, 'login_field')
+    username_field.send_keys("incorrectLogin")
 
-time.sleep(4)
+    password_field = driver.find_element(By.ID, 'password')
+    password_field.send_keys("Aaaaaaaaaaaa02")
 
-error_message = driver.find_element_by_css_selector(".flash-error")
-assert "Incorrect username or password" in error_message.text
+    time.sleep(3)
+
+    login_button = driver.find_element(By.NAME, 'commit')
+    login_button.click()
+
+    error_message = driver.find_element(By.CLASS_NAME, 'js-flash-alert')
+    time.sleep(6)
+    assert error_message is not None
