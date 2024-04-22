@@ -1,27 +1,20 @@
 import requests
 
 
-class GitHubAPIClient:
-    """Current class contains every API call we use in tests"""
-    
-    def __init__(self) -> None:
-        pass
+class GitHubAPI:
 
-    def search_repos(self, repo_name):
-        print("Sending request to url https://api.github.com/search/repositories")
-        r = requests.get("https://api.github.com/search/repositories", params={'q': repo_name})
-        print(f"Responce retriewed {r}")
+    def __init__(self, base_url_api: str, version) -> None:
+        self.base_url = base_url_api
+        self.version = version
 
-        body = r.json()
+    def get_user(self, username: str):
+        req = requests.get(f"{self.base_url}/users/{username}")
+        req.raise_for_status()
 
-        return body
-    
+        return req.json()
 
-    def search_commits(self, commit_hash):
-        print("Sending request to url https://api.github.com/search/commit")
-        r = requests.get("https://api.github.com/search/commit", params={'q': commit_hash})
-        print(f"Responce retriewed {r}")
-
-        body = r.json()
-
-        return body
+    def get_repos(self, repos_search_param: str):
+        req = requests.get(
+            f"{self.base_url}/users/search/repositories", params={'q': repos_search_param})
+        req.raise_for_status()
+        return req.json()

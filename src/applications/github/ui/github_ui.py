@@ -1,30 +1,20 @@
-from selenium import webdriver
-from selenium.webdriver.common.by import By
+
+from src.applications.github.ui.pages.page_login import PageLogin
 
 
 class GitHubUILoginPage:
 
-    def __init__(self) -> None:
-        self.driver = webdriver.Edge()
+    def __init__(self, base_url, driver) -> None:
+        self.base_url = base_url
+        self.driver = driver
 
-    def navigate_to_page(self):
-        self.driver.get("https://github.com/login")
+        self.login_page = PageLogin(self.driver, self.base_url)
 
-    def try_to_login(self, username, password):
-        username_field = self.driver.find_element(By.ID, 'login_field')
-        username_field.send_keys(username)
-
-        password_field = self.driver.find_element(By.ID, 'password')
-        password_field.send_keys(password)
-
-        login_button = self.driver.find_element(By.NAME, 'commit')
-        login_button.click()
-
-    def check_error_message(self):
-        error_message = self.driver.find_element(
-            By.CLASS_NAME, 'js-flash-alert')
-
-        return error_message is not None
+    def login(self, username, userpassword):
+        return self.login_page.login(username, userpassword)
 
     def close_browser(self):
-        self.driver.quit()
+        self.driver.close()
+
+    def get_title(self):
+        return self.driver.title
